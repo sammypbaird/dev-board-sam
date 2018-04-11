@@ -48,7 +48,7 @@
 		</dependency>
 
 	</dependencies>
-	<name>dev-board-serial-alerts</name>
+	<name>dev-board-sam</name>
 	<build>
 		<plugins>
 			<plugin>
