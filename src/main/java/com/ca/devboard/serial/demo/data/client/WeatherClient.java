@@ -7,17 +7,14 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClients;
 
 public class WeatherClient
 {
 	//https://api.weather.gov/stations/KBOI/observations/current
 	//https://api.weather.gov/gridpoints/BOI/131,83/forecast
 	
-	private static final HttpClient client = HttpClients.createDefault();
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
 	public Forecast downloadForecast()
@@ -36,7 +33,7 @@ public class WeatherClient
 			HttpGet get = new HttpGet(uri);
 			get.addHeader("Accept", "application/geo+json;version=1");
 			get.addHeader("User-Agent", "sammypbaird@gmail.com");
-			HttpResponse response = client.execute(get);
+			HttpResponse response = HttpClient.get().execute(get);
 			Map<String, Object> json = mapper.readValue(response.getEntity().getContent(), Map.class);
 			parseHighLowForecast(json, forecast);
 		}
@@ -78,7 +75,7 @@ public class WeatherClient
 			HttpGet get = new HttpGet(uri);
 			get.addHeader("Accept", "application/geo+json;version=1");
 			get.addHeader("User-Agent", "sammypbaird@gmail.com");
-			HttpResponse response = client.execute(get);
+			HttpResponse response = HttpClient.get().execute(get);
 			Map<String, Object> json = mapper.readValue(response.getEntity().getContent(), Map.class);
 			return parseTemperature(json);
 		}
