@@ -12,6 +12,9 @@ public class Alerts
 	public Alerts()
 	{
 		alertExecutions.add(new WeatherAlert());
+//		alertExecutions.add(new GraphiteDatabaseCpuAlert());
+//		alertExecutions.add(new GraphiteGarbageCollectionAlert());
+//		alertExecutions.add(new ReportDurationAlert());
 	}
 	
 	public void update(SerialIO serialIO) throws IOException, InterruptedException
