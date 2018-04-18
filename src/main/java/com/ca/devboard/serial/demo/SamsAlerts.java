@@ -9,7 +9,6 @@ import java.util.Random;
 
 public class SamsAlerts 
 {
-	private static final NumberFormat NUMBER_FORMAT = new DecimalFormat("0.000");
 	private static final Random random = new Random();
 	private static final long POLL_INTERVAL_MS = 5000;
 	
@@ -45,20 +44,7 @@ public class SamsAlerts
 	private static void sendRandomAlert(SerialIO serialIo, int alertId, String label) throws IOException, InterruptedException
 	{
 		double number = random.nextDouble() * 100;
-		serialIo.sendAsciiString(alertId, (int) number, label + generate4DigitString(number));
+		serialIo.sendAsciiString(alertId, (int) number, label + AlertUtils.generate4DigitString(number));
 		System.out.println(number);
-	}
-	
-	private static String generate4DigitString(double number)
-	{
-		StringBuilder sb = new StringBuilder();
-		String strNumber = NUMBER_FORMAT.format(number);
-		
-		//if the first 4 digits contains a period, send 5 characters, because the period will be combined with one of the digits
-		int size = strNumber.substring(0, 4).contains(".") ? 5 : 4;
-		for (int i=0; i<size; i++)
-			sb.append(strNumber.charAt(i));
-		
-		return sb.toString();
 	}
 }

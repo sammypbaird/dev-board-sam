@@ -14,12 +14,12 @@ public class GraphiteClient
 {
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
-	public static void main(String[] args)
-	{
-		GraphiteMetric graphiteMetric = new GraphiteClient().getLatestGarbageCollection(); //boi-reportdb, boi-mssql-db3
-		System.out.println("Target: " + graphiteMetric.target);
-		System.out.println("Value: " + graphiteMetric.value);
-	}
+//	public static void main(String[] args)
+//	{
+//		GraphiteMetric graphiteMetric = new GraphiteClient().getLatestGarbageCollection(); //boi-reportdb, boi-mssql-db3
+//		System.out.println("Target: " + graphiteMetric.target);
+//		System.out.println("Value: " + graphiteMetric.value);
+//	}
 	
 	public GraphiteMetric getLatestDatabaseCpu(String database)
 	{
