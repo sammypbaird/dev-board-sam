@@ -39,7 +39,7 @@ public class WeatherClient
 		}
 		catch (IOException|URISyntaxException ex)
 		{
-			throw new IllegalArgumentException(ex);
+			throw new AlertClientException(ex);
 		}
 		return forecast;
 	}

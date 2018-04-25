@@ -1,6 +1,7 @@
 package com.ca.devboard.serial.demo.alert;
 
 import com.ca.devboard.serial.SerialIO;
+import com.ca.devboard.serial.demo.data.client.AlertClientException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,9 @@ public class Alerts
 	public Alerts()
 	{
 		alertExecutions.add(new WeatherAlert());
-//		alertExecutions.add(new GraphiteDatabaseCpuAlert());
-//		alertExecutions.add(new GraphiteGarbageCollectionAlert());
-//		alertExecutions.add(new ReportDurationAlert());
+		alertExecutions.add(new GraphiteDatabaseCpuAlert());
+		alertExecutions.add(new GraphiteGarbageCollectionAlert());
+		alertExecutions.add(new ReportDurationAlert());
 	}
 	
 	public void init()
@@ -42,7 +43,14 @@ public class Alerts
 		{
 			if (alertExecution.needsRefresh())
 			{
-				alertExecution.execute(serialIO);
+				try
+				{
+					alertExecution.execute(serialIO);
+				}
+				catch (AlertClientException ex)
+				{
+					ex.printStackTrace();
+				}
 			}
 		}
 	}

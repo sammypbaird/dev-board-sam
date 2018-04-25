@@ -1,13 +1,10 @@
 package com.ca.devboard.serial.demo.data.client;
 
-import com.sun.xml.internal.ws.util.StreamUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -35,7 +32,7 @@ public class WebRequestLogWsClient
 		}
 		catch (URISyntaxException|IOException ex)
 		{
-			throw new IllegalArgumentException(ex);
+			throw new AlertClientException(ex);
 		}
 	}
 }

@@ -71,7 +71,7 @@ public class GraphiteClient
 		}
 		catch (Exception ex)
 		{
-			throw new IllegalArgumentException(ex.getMessage(), ex);
+			throw new AlertClientException(ex.getMessage(), ex);
 		}
 	}
 	
