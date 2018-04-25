@@ -13,6 +13,11 @@ public abstract class AlertExecution
 	 */
 	public abstract long getRefreshDelay();
 	
+	public void setRefreshTimestamp(long refreshTimestamp)
+	{
+		this.refreshTimestamp = refreshTimestamp;
+	}
+	
 	/**
 	 * Upon executing, this should gather the metrics, and alert to the dev-board
 	 */

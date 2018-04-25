@@ -17,6 +17,25 @@ public class Alerts
 //		alertExecutions.add(new ReportDurationAlert());
 	}
 	
+	public void init()
+	{
+		//find the minimum refresh delay
+		long minRefreshDelay = Long.MAX_VALUE;
+		for (AlertExecution alertExecution : alertExecutions)
+			if (alertExecution.getRefreshDelay() < minRefreshDelay)
+				minRefreshDelay = alertExecution.getRefreshDelay();
+		
+		//initialize the delays to divide all the alerts' delays equally
+		long currentTimeMillis = System.currentTimeMillis();
+		long commonDelay = minRefreshDelay / alertExecutions.size();
+		long delay = 0;
+		for (AlertExecution alertExecution : alertExecutions)
+		{
+			alertExecution.setRefreshTimestamp(currentTimeMillis + delay);
+			delay += commonDelay;
+		}
+	}
+	
 	public void update(SerialIO serialIO) throws IOException, InterruptedException
 	{
 		for (AlertExecution alertExecution : alertExecutions)
